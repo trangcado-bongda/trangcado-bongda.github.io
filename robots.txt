@@ -1,0 +1,5 @@
+User-agent:*
+Disallow:/App/
+Disallow:/Data/
+Allow:/
+Sitemap:https://trangcado-bongda.github.io/sitemap.xml
