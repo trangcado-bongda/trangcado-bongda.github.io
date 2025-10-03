@@ -516,12 +516,12 @@
   </div>
 </div>
           <!-- FAQ -->
-<h2>Câu Hỏi Thường Gặp (FAQ) – Top 10 trang cá cược bóng đá</h2>
+<h2>Câu Hỏi Thường Gặp (FAQ) – Top 5 trang cá cược bóng đá</h2>
 
 <div class="1eb5fc1203-trangcadobongda about_cont">
   <!-- 1 -->
   <div class="1eb5fc1203-trangcadobongda qa-item">
-    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false">
+    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false" type="button">
       1. Dấu hiệu nào cho thấy một nhà cái đáng tin cậy?
     </button>
     <div class="1eb5fc1203-trangcadobongda qa-answer" style="display: none;" role="region" aria-hidden="true">
@@ -534,7 +534,7 @@
 
   <!-- 2 -->
   <div class="1eb5fc1203-trangcadobongda qa-item">
-    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false">
+    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false" type="button">
       2. Giấy phép nhà cái uy tín thường được cấp bởi cơ quan nào?
     </button>
     <div class="1eb5fc1203-trangcadobongda qa-answer" style="display: none;" role="region" aria-hidden="true">
@@ -547,7 +547,7 @@
 
   <!-- 3 -->
   <div class="1eb5fc1203-trangcadobongda qa-item">
-    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false">
+    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false" type="button">
       3. Gặp sự cố khi chơi thì xử lý thế nào?
     </button>
     <div class="1eb5fc1203-trangcadobongda qa-answer" style="display: none;" role="region" aria-hidden="true">
@@ -560,7 +560,7 @@
 
   <!-- 4 -->
   <div class="1eb5fc1203-trangcadobongda qa-item">
-    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false">
+    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false" type="button">
       4. Phương thức nạp/rút nào thường được hỗ trợ?
     </button>
     <div class="1eb5fc1203-trangcadobongda qa-answer" style="display: none;" role="region" aria-hidden="true">
@@ -573,7 +573,7 @@
 
   <!-- 5 -->
   <div class="1eb5fc1203-trangcadobongda qa-item">
-    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false">
+    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="false" type="button">
       5. Khuyến mãi của nhà cái có đáng tin không?
     </button>
     <div class="1eb5fc1203-trangcadobongda qa-answer" style="display: none;" role="region" aria-hidden="true">
@@ -586,7 +586,7 @@
 
   <!-- 6 -->
   <div class="1eb5fc1203-trangcadobongda qa-item">
-    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="true">
+    <button class="1eb5fc1203-trangcadobongda qa-question" aria-expanded="true" type="button">
       6. Cá cược bóng đá có rủi ro không? Cách giảm rủi ro?
     </button>
     <div class="1eb5fc1203-trangcadobongda qa-answer" style="display: block;" role="region" aria-hidden="false">
@@ -601,24 +601,29 @@
 
 <script>
   (function () {
-    const items = document.querySelectorAll('.1eb5fc1203-trangcadobongda.qa-item');
+    // Chỉ chọn theo .qa-item / .qa-question để tránh lỗi selector với class bắt đầu bằng số
+    const items = document.querySelectorAll('.qa-item');
+
+    // Gắn id/ARIA và sự kiện
     items.forEach((item, idx) => {
       const btn = item.querySelector('.qa-question');
       const ans = item.querySelector('.qa-answer');
-      const id = 'qa-answer-' + (idx + 1);
+      if (!btn || !ans) return;
 
-      // Gắn liên kết ARIA
+      const id = 'qa-answer-' + (idx + 1);
       ans.id = id;
       btn.setAttribute('aria-controls', id);
+      btn.setAttribute('type', 'button');
 
-      const isOpen = ans.style.display === 'block';
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      ans.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      // Trạng thái ban đầu theo computed style (ổn định hơn so với .style)
+      const opened = window.getComputedStyle(ans).display !== 'none';
+      btn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      ans.setAttribute('aria-hidden', opened ? 'false' : 'true');
 
       btn.addEventListener('click', () => {
-        const currentlyOpen = btn.getAttribute('aria-expanded') === 'true';
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-        // Đóng tất cả
+        // Đóng tất cả trước (accordion 1-mục)
         document.querySelectorAll('.qa-answer').forEach(a => {
           a.style.display = 'none';
           a.setAttribute('aria-hidden', 'true');
@@ -627,8 +632,8 @@
           b.setAttribute('aria-expanded', 'false');
         });
 
-        // Mở lại nếu trước đó chưa mở
-        if (!currentlyOpen) {
+        // Nếu trước đó đang đóng thì mở; nếu đang mở thì giữ trạng thái đóng (toggle chuẩn)
+        if (!isOpen) {
           ans.style.display = 'block';
           ans.setAttribute('aria-hidden', 'false');
           btn.setAttribute('aria-expanded', 'true');
@@ -648,7 +653,7 @@
       <span class="1eb5fc1203-trangcadobongda time">2025-03-05 07:58:56</span>
     </div>
     <p class="1eb5fc1203-trangcadobongda content">
-      Go88 là nơi mình sử dụng thường xuyên: hỗ trợ VND, thao tác đơn giản và bảng kèo trực tuyến được cập nhật liên tục nên theo kèo rất thuận tiện.
+      Lu88 là nơi mình sử dụng thường xuyên: hỗ trợ VND, thao tác đơn giản và bảng kèo trực tuyến được cập nhật liên tục nên theo kèo rất thuận tiện.
     </p>
   </div>
 
@@ -659,7 +664,7 @@
       <span class="1eb5fc1203-trangcadobongda time">2025-03-05 05:53:04</span>
     </div>
     <p class="1eb5fc1203-trangcadobongda content">
-      Tỷ lệ kèo tại BK8 mình thấy ổn định và thường tốt hơn nhiều nơi khác. Trải nghiệm tổng thể đáng tin, nạp rút rõ ràng.
+      Tỷ lệ kèo tại Xibet mình thấy ổn định và thường tốt hơn nhiều nơi khác. Trải nghiệm tổng thể đáng tin, nạp rút rõ ràng.
     </p>
   </div>
 
@@ -670,7 +675,7 @@
       <span class="1eb5fc1203-trangcadobongda time">2025-03-05 01:44:16</span>
     </div>
     <p class="1eb5fc1203-trangcadobongda content">
-      QH88 có kèo bóng đá hôm nay khá đa dạng và mức tỷ lệ hấp dẫn. Danh mục giải đấu lớn đầy đủ, vào kèo nhanh.
+      K88 có kèo bóng đá hôm nay khá đa dạng và mức tỷ lệ hấp dẫn. Danh mục giải đấu lớn đầy đủ, vào kèo nhanh.
     </p>
   </div>
 
@@ -681,17 +686,17 @@
       <span class="1eb5fc1203-trangcadobongda time">2025-03-05 01:27:07</span>
     </div>
     <p class="1eb5fc1203-trangcadobongda content">
-      12Bet làm việc khá chuyên nghiệp. Bảng tỷ lệ cập nhật nhanh giúp mình quyết định cược kịp thời, ít phải chờ.
+      Hbet làm việc khá chuyên nghiệp. Bảng tỷ lệ cập nhật nhanh giúp mình quyết định cược kịp thời, ít phải chờ.
     </p>
   </div>
 </div>
 
 <div class="1eb5fc1203-trangcadobongda button-container">
   <a class="1eb5fc1203-trangcadobongda btn btn-register" href="javascript:void(0)" onclick="redirectToLink()" rel="nofollow noopener">
-    ✚ Đăng ký VSBET
+    ✚ Đăng ký Lu88
   </a>
   <a class="1eb5fc1203-trangcadobongda btn btn-login" href="javascript:void(0)" onclick="redirectToLink()" rel="nofollow noopener">
-    ✍ Đăng nhập VSBET
+    ✍ Đăng nhập Lu88
   </a>
 </div>
           <!--Tìm kiếm phổ biến-->
